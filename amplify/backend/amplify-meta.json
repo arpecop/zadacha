@@ -1,0 +1,59 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-zadacha-dev-105501-authRole",
+      "UnauthRoleArn": "arn:aws:iam::445820032868:role/amplify-zadacha-dev-105501-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::445820032868:role/amplify-zadacha-dev-105501-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-zadacha-dev-105501-deployment",
+      "UnauthRoleName": "amplify-zadacha-dev-105501-unauthRole",
+      "StackName": "amplify-zadacha-dev-105501",
+      "StackId": "arn:aws:cloudformation:eu-west-1:445820032868:stack/amplify-zadacha-dev-105501/8a094e00-2f1f-11ec-8882-02a48f0ef33f",
+      "AmplifyAppId": "d1fsatusfwfqw5"
+    }
+  },
+  "auth": {
+    "zadacha53eecd31": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanisms": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-zadacha-dev-105501-deployment/amplify-cfn-templates/auth/zadacha53eecd31-cloudformation-template.yml",
+        "logicalId": "authzadacha53eecd31"
+      },
+      "lastPushTimeStamp": "2021-10-17T08:02:05.665Z",
+      "output": {
+        "UserPoolId": "eu-west-1_CG0F7lv9S",
+        "AppClientIDWeb": "7cs53cd2srgqqo4j4r5fspjp60",
+        "AppClientID": "4l5701qr7bgon5grh26b51sfjq",
+        "HostedUIDomain": "zadacha53eecd31-53eecd31-dev",
+        "IdentityPoolId": "eu-west-1:c3a93313-6ea3-4bfd-84d8-7b8f63b8701c",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:445820032868:userpool/eu-west-1_CG0F7lv9S",
+        "IdentityPoolName": "zadacha53eecd31_identitypool_53eecd31__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"exp://127.0.0.1:19000/--/\"],\"LogoutURLs\":[\"exp://127.0.0.1:19000/--/\"]}",
+        "UserPoolName": "zadacha53eecd31_userpool_53eecd31"
+      },
+      "lastPushDirHash": "W06gBIiVJ/MizSlReYIsH8q06Ro="
+    }
+  }
+}
