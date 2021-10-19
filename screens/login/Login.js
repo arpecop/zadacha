@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRecoilState } from 'recoil'
 import { loggedInUserData } from '../../utils/state'
 import Error from './Error'
+import SSO from './SSO'
 import styles from './styles'
 
 const image = require('../../assets/images/back.jpg')
@@ -43,6 +44,7 @@ const Login = ({ navigation }) => {
       <ImageBackground source={image} style={styles.image}>
         <Text style={styles.logo}>Women at Risk</Text>
         {error && <Error errorMessage={error} />}
+        <SSO />
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}

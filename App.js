@@ -11,6 +11,7 @@ import Login from './screens/login/Login'
 import SignUp from './screens/login/SignUp'
 import Forgot from './screens/login/Forgot'
 import Home from './screens/Home'
+//import awsconfig from './src/aws-exports'
 Amplify.configure({
   aws_project_region: 'eu-west-1',
   aws_cognito_identity_pool_id:
@@ -46,7 +47,7 @@ function Routes () {
     }
     mount()
   }, [setUser])
-
+  AsyncStorage.removeItem('user')
   return !user.username ? (
     <NavigationContainer>
       <Stack.Navigator>

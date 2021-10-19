@@ -123,7 +123,10 @@ const SignUp = ({ navigation }) => {
         {state.stage === 2 && (
           <>
             <Text>You Signed up successfully</Text>
-            <TouchableOpacity style={styles.loginBtn} onPress={confirmSignUp}>
+            <TouchableOpacity
+              style={styles.loginBtn}
+              onPress={() => navigation.navigate('Login')}
+            >
               <Text style={styles.loginText}>Влез</Text>
             </TouchableOpacity>
           </>
