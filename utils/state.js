@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 export const loggedInUserData = atom({
   key: 'loggedInUser',
@@ -10,18 +10,13 @@ export const loggedInUserData = atom({
     username: null,
     token: null,
   },
-});
-
-export const navigation = atom({
-  key: 'navigation',
-  default: 'home',
-});
+})
 
 export const items = atom({
   key: 'items',
   default: { rows: [] },
-});
+})
 export const modal = atom({
   key: 'modal',
   default: false,
-});
+})

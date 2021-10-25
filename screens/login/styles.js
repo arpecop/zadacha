@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   logo: {
     fontWeight: '100',
     fontSize: 50,
     color: 'black',
-    marginBottom: 40
+    marginBottom: 40,
   },
   inputView: {
     width: '80%',
@@ -17,15 +17,15 @@ const styles = StyleSheet.create({
     height: 40,
     marginBottom: 20,
     justifyContent: 'center',
-    padding: 20
+    padding: 20,
   },
   inputText: {
     height: 50,
-    color: 'black'
+    color: 'black',
   },
   forgot: {
     color: 'black',
-    fontSize: 11
+    fontSize: 11,
   },
   loginBtn: {
     width: '80%',
@@ -35,16 +35,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
-    marginBottom: 10
+    marginBottom: 10,
   },
   loginText: {
-    color: 'black'
+    color: 'black',
   },
   image: {
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 })
 export default styles

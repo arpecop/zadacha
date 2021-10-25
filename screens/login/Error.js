@@ -7,24 +7,22 @@ const translated = {
   AuthError: 'Username or Password cannot be empty',
   CodeMismatchException: 'Invalid code , please try again',
   NotAuthorizedException: 'Username or password not valid',
-  UsernameExistsException: 'The user does exist',
+  UsernameExistsException: 'The username already exist',
   PasswordNotMatch: 'Passwords does not match',
   InvalidParameterException: 'the password minimum length is 6 symbols',
-  Empty: ''
+  Empty: '',
 }
 
-const Error = props =>
+const Error = (props) =>
   Object.entries(props).map(
-    ([err, val]) =>
+    ([val]) =>
       val.name !== 'Empty' && (
         <View key={val.name}>
           <Text style={{ color: 'white' }}>
-            {translated[val.name]
-              ? translated[val.name]
-              : `${val.message}-${val.name}`}
+            {translated[val.name] ? translated[val.name] : `${val.message}-${val.name}`}
           </Text>
         </View>
-      )
+      ),
   )
 
 export default Error

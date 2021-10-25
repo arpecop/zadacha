@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { Text, View, Button } from 'react-native'
-import Amplify, { Auth, Hub } from 'aws-amplify'
+import { Auth, Hub } from 'aws-amplify'
 import styles from './styles'
 export default function SSO () {
   const [user, setUser] = useState('')
@@ -9,7 +9,7 @@ export default function SSO () {
 
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
-      console.log(data)
+      //console.log(data)
       switch (event) {
         case 'signIn':
           setUser(data)

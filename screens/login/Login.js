@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import { Auth } from 'aws-amplify'
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  ImageBackground
-} from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRecoilState } from 'recoil'
 import { loggedInUserData } from '../../utils/state'
@@ -30,7 +24,7 @@ const Login = ({ navigation }) => {
         ...user1.attributes,
         username: user1.username,
         token: session.accessToken.jwtToken,
-        refreshtoken: session.refreshToken.token
+        refreshtoken: session.refreshToken.token,
       }
       setUser(userInfo)
       AsyncStorage.setItem('user', JSON.stringify(userInfo))
@@ -51,7 +45,7 @@ const Login = ({ navigation }) => {
             placeholder='username'
             placeholderTextColor='#003f5c'
             autoCapitalize='none'
-            onChangeText={text => setUsername(text)}
+            onChangeText={(text) => setUsername(text)}
           />
         </View>
         <View style={styles.inputView}>
@@ -60,7 +54,7 @@ const Login = ({ navigation }) => {
             style={styles.inputText}
             placeholder='password'
             placeholderTextColor='#003f5c'
-            onChangeText={text => setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
           />
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
@@ -70,10 +64,7 @@ const Login = ({ navigation }) => {
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{ marginTop: 5 }}>
-          <Text
-            style={styles.loginText}
-            onPress={() => navigation.navigate('SignUp')}
-          >
+          <Text style={styles.loginText} onPress={() => navigation.navigate('SignUp')}>
             Sign Up
           </Text>
         </TouchableOpacity>
