@@ -7,7 +7,7 @@ import { loggedInUserData } from '../../utils/state'
 import Error from './Error'
 import styles from './styles'
 import Layout from '../../layout/LayoutLogin'
-
+import { BlurView } from 'expo-blur'
 const Login = ({ navigation }) => {
   const [user, setUser] = useRecoilState(loggedInUserData)
   const [username, setUsername] = useState('')
@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
     <Layout>
       <Text style={styles.logo}>Women at Risk</Text>
       {error && <Error errorMessage={error} />}
-      <View style={styles.inputView}>
+      <BlurView intensity={80} tint='dark' style={styles.inputView}>
         <TextInput
           style={styles.inputText}
           placeholder='username'
@@ -43,8 +43,8 @@ const Login = ({ navigation }) => {
           autoCapitalize='none'
           onChangeText={(text) => setUsername(text)}
         />
-      </View>
-      <View style={styles.inputView}>
+      </BlurView>
+      <BlurView intensity={80} tint='dark' style={styles.inputView}>
         <TextInput
           secureTextEntry
           style={styles.inputText}
@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
           placeholderTextColor='white'
           onChangeText={(text) => setPassword(text)}
         />
-      </View>
+      </BlurView>
       <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>

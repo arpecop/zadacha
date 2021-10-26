@@ -6,7 +6,7 @@ import { Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-
 import Error from './Error'
 import styles from './styles'
 import Layout from '../../layout/LayoutLogin'
-
+import { BlurView } from 'expo-blur'
 const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
     username: '',
@@ -53,7 +53,7 @@ const SignUp = ({ navigation }) => {
       {state.stage === 0 && (
         <>
           {state.error && <Error errorMessage={state.error} />}
-          <View style={styles.inputView}>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='username'
@@ -61,8 +61,8 @@ const SignUp = ({ navigation }) => {
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'username', value: text })}
             />
-          </View>
-          <View style={styles.inputView}>
+          </BlurView>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               secureTextEntry
               style={styles.inputText}
@@ -71,8 +71,8 @@ const SignUp = ({ navigation }) => {
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'password', value: text })}
             />
-          </View>
-          <View style={styles.inputView}>
+          </BlurView>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='email...'
@@ -80,7 +80,7 @@ const SignUp = ({ navigation }) => {
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'email', value: text })}
             />
-          </View>
+          </BlurView>
           <TouchableOpacity style={styles.loginBtn} onPress={signUp}>
             <Text style={styles.loginText}>Sign Up</Text>
           </TouchableOpacity>
@@ -89,7 +89,7 @@ const SignUp = ({ navigation }) => {
       {state.stage === 1 && (
         <>
           {state.error && <Error errorMessage={state.error} />}
-          <View style={styles.inputView}>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='auth code...'
@@ -97,7 +97,7 @@ const SignUp = ({ navigation }) => {
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'authCode', value: text })}
             />
-          </View>
+          </BlurView>
 
           <TouchableOpacity style={styles.loginBtn} onPress={confirmSignUp}>
             <Text style={styles.loginText}>Confirm</Text>

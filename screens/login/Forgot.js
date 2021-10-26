@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { Auth } from 'aws-amplify'
 
-import { Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import Error from './Error'
 import styles from './styles'
 import Layout from '../../layout/LayoutLogin'
+import { BlurView } from 'expo-blur'
 
-const Forgot = () => {
+const Forgot = ({ navigation }) => {
   const [state, setState] = useState({
     username: '',
     error: '',
@@ -55,15 +56,15 @@ const Forgot = () => {
       <Text>{state.error && <Error errorMessage={state.error} />}</Text>
       {state.stage === 0 && (
         <>
-          <View style={styles.inputView}>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='username'
-              placeholderTextColor='#003f5c'
+              placeholderTextColor='white'
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'username', value: text })}
             />
-          </View>
+          </BlurView>
 
           <TouchableOpacity style={styles.loginBtn} onPress={login}>
             <Text style={styles.loginText}>Next</Text>
@@ -74,15 +75,15 @@ const Forgot = () => {
       {state.stage === 1 && (
         <>
           <Text style={{ color: 'white' }}>Check your email-a си for confirmation code</Text>
-          <View style={styles.inputView}>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='4 digit code...'
-              placeholderTextColor='#003f5c'
+              placeholderTextColor='white'
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'validation', value: text })}
             />
-          </View>
+          </BlurView>
 
           <TouchableOpacity style={styles.loginBtn} onPress={submitCode}>
             <Text style={styles.loginText}>Confirm</Text>
@@ -92,27 +93,27 @@ const Forgot = () => {
 
       {state.stage === 2 && (
         <>
-          <View style={styles.inputView}>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               secureTextEntry
               style={styles.inputText}
               placeholder='password...'
-              placeholderTextColor='#003f5c'
+              placeholderTextColor='white'
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'password', value: text })}
             />
-          </View>
+          </BlurView>
 
-          <View style={styles.inputView}>
+          <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               secureTextEntry
               style={styles.inputText}
               placeholder='confirm password...'
-              placeholderTextColor='#003f5c'
+              placeholderTextColor='white'
               autoCapitalize='none'
               onChangeText={(text) => handleUpdate({ target: 'confirmPassword', value: text })}
             />
-          </View>
+          </BlurView>
 
           <TouchableOpacity style={styles.loginBtn} onPress={changePassword}>
             <Text style={styles.loginText}>Sign Up</Text>
@@ -121,9 +122,9 @@ const Forgot = () => {
       )}
       {state.stage === 3 && (
         <>
-          <>
-            <Text>Password Changed!</Text>
-          </>
+          <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.loginText}>Sign Up</Text>
+          </TouchableOpacity>
         </>
       )}
     </Layout>

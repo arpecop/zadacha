@@ -10,13 +10,13 @@ import { useRecoilState, RecoilRoot } from 'recoil'
 import { loggedInUserData } from './utils/state'
 import _ from 'lodash'
 //import useStorage from './hooks/useStorage'
-
+console.log('App.js')
 import Login from './screens/login/Login'
 import SignUp from './screens/login/SignUp'
 import Forgot from './screens/login/Forgot'
 import Home from './screens/Home'
 
-const TestRounte = () => {
+const TestRoute = () => {
   return <View></View>
 }
 
@@ -111,7 +111,7 @@ function Routes () {
             tabBarIcon: ({ color, size }) => <Ionicons name='ios-home' size={size} color={color} />,
           }}
           name='Test'
-          component={TestRounte}
+          component={TestRoute}
         />
       </Tab.Navigator>
     </NavigationContainer>
