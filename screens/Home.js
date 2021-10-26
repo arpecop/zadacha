@@ -21,61 +21,59 @@ export default function Home () {
   }, [])
   return (
     <Layout>
-      <View style={styles.container}>
-        {currentVideo !== null && (
-          <View>
-            <Video
-              shouldPlay
-              ref={video}
-              style={styles.video}
-              source={{
-                uri: 'https://strapi.rudixlab.com' + videos[currentVideo].url.url,
-              }}
-              useNativeControls
-              resizeMode='contain'
-              isLooping={false}
-              onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-            />
-            <View style={styles.buttons}>
-              <TouchableOpacity
-                onPress={() =>
-                  status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
-                }>
-                <Ionicons
-                  name={status.isPlaying ? 'pause-circle-outline' : 'play-circle-outline'}
-                  size={32}
-                  color='green'
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-        <ScrollView>
-          {videos.map((video, index) => (
+      {currentVideo !== null && (
+        <View>
+          <Video
+            shouldPlay
+            ref={video}
+            style={styles.video}
+            source={{
+              uri: 'https://strapi.rudixlab.com' + videos[currentVideo].url.url,
+            }}
+            useNativeControls
+            resizeMode='contain'
+            isLooping={true}
+            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+          />
+          <View style={styles.buttons}>
             <TouchableOpacity
-              style={[styles.item, index === currentVideo && styles.itemSelected]}
-              key={index}>
-              <Row onPress={() => setCurrentVideo(index)}>
-                <Col style={{ width: 55 }}>
-                  <Image
-                    style={styles.rowImage}
-                    source={{
-                      uri: 'https://strapi.rudixlab.com' + video.thumbnail.formats.medium.url,
-                    }}
-                  />
-                </Col>
-                <Col style={{ textAlign: 'center', justifyContent: 'center' }}>
-                  <Text>{video.title}</Text>
-                  <Text>{video.description}</Text>
-                </Col>
-                <Col style={{ width: 40, textAlign: 'center', justifyContent: 'center' }}>
-                  <Ionicons name={'play-circle-outline'} size={32} color='gray' />
-                </Col>
-              </Row>
+              onPress={() =>
+                status.isPlaying ? video.current.pauseAsync() : video.current.playAsync()
+              }>
+              <Ionicons
+                name={status.isPlaying ? 'pause-circle-outline' : 'play-circle-outline'}
+                size={32}
+                color='green'
+              />
             </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+          </View>
+        </View>
+      )}
+      <ScrollView>
+        {videos.map((video, index) => (
+          <TouchableOpacity
+            style={[styles.item, index === currentVideo && styles.itemSelected]}
+            key={index}>
+            <Row onPress={() => setCurrentVideo(index)}>
+              <Col style={{ width: 55 }}>
+                <Image
+                  style={styles.rowImage}
+                  source={{
+                    uri: 'https://strapi.rudixlab.com' + video.thumbnail.formats.medium.url,
+                  }}
+                />
+              </Col>
+              <Col style={{ textAlign: 'center', justifyContent: 'center' }}>
+                <Text>{video.title}</Text>
+                <Text>{video.description}</Text>
+              </Col>
+              <Col style={{ width: 40, textAlign: 'center', justifyContent: 'center' }}>
+                <Ionicons name={'play-circle-outline'} size={32} color='gray' />
+              </Col>
+            </Row>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </Layout>
   )
 }

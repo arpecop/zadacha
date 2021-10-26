@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View } from 'react-native'
+import { LogBox, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Amplify } from 'aws-amplify'
 import { useRecoilState, RecoilRoot } from 'recoil'
 import { loggedInUserData } from './utils/state'
+import _ from 'lodash'
+//import useStorage from './hooks/useStorage'
 
 import Login from './screens/login/Login'
 import SignUp from './screens/login/SignUp'
@@ -16,6 +18,15 @@ import Home from './screens/Home'
 
 const TestRounte = () => {
   return <View></View>
+}
+
+LogBox.ignoreLogs(['Setting a timer for a long period of time']) // ignore specific logs
+//LogBox.ignoreAllLogs() // ignore all logs
+const _console = _.clone(console)
+console.warn = (message) => {
+  if (message.indexOf('Setting a timer') <= -1) {
+    _console.warn(message)
+  }
 }
 //import awsconfig from './src/aws-exports'
 Amplify.configure({
@@ -32,7 +43,6 @@ const Tab = createBottomTabNavigator()
 
 function Routes () {
   const [user, setUser] = useRecoilState(loggedInUserData)
-
   const options = {
     headerStyle: {
       backgroundColor: '#FABAB8',
@@ -54,7 +64,7 @@ function Routes () {
       setUser(userStorage)
     }
     mount()
-  }, [setUser])
+  }, [])
   //AsyncStorage.removeItem('user')
   return !user.username ? (
     <NavigationContainer>
@@ -69,17 +79,19 @@ function Routes () {
       </Stack.Navigator>
     </NavigationContainer>
   ) : (
-    <NavigationContainer options={{ headerShown: false }}>
+    <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{
-          activeTintColor: 'black',
-          inactiveTintColor: 'gray',
-          activeBackgroundColor: options.headerStyle.backgroundColor,
-          inactiveBackgroundColor: options.headerStyle.backgroundColor,
-          style: {
-            backgroundColor: 'red',
-            paddingBottom: 3,
-          },
+        screenOptions={{
+          tabBarActiveTintColor: 'black',
+          tabBarInactiveTintColor: 'gray',
+          tabBarActiveBackgroundColor: '#FABAB8',
+          tabBarInactiveBackgroundColor: '#FABAB8',
+          tabBarStyle: [
+            {
+              display: 'flex',
+            },
+            null,
+          ],
         }}>
         <Tab.Screen
           tabBarShowLabel={false}

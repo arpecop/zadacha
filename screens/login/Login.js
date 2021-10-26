@@ -5,10 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRecoilState } from 'recoil'
 import { loggedInUserData } from '../../utils/state'
 import Error from './Error'
-import SSO from './SSO'
 import styles from './styles'
-
-const image = require('../../assets/images/back.jpg')
+import Layout from '../../layout/LayoutLogin'
 
 const Login = ({ navigation }) => {
   const [user, setUser] = useRecoilState(loggedInUserData)
@@ -34,42 +32,39 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={image} style={styles.image}>
-        <Text style={styles.logo}>Women at Risk</Text>
-        {error && <Error errorMessage={error} />}
-        <SSO />
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.inputText}
-            placeholder='username'
-            placeholderTextColor='#003f5c'
-            autoCapitalize='none'
-            onChangeText={(text) => setUsername(text)}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            secureTextEntry
-            style={styles.inputText}
-            placeholder='password'
-            placeholderTextColor='#003f5c'
-            onChangeText={(text) => setPassword(text)}
-          />
-        </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
-          <Text style={styles.forgot}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn} onPress={login}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ marginTop: 5 }}>
-          <Text style={styles.loginText} onPress={() => navigation.navigate('SignUp')}>
-            Sign Up
-          </Text>
-        </TouchableOpacity>
-      </ImageBackground>
-    </View>
+    <Layout>
+      <Text style={styles.logo}>Women at Risk</Text>
+      {error && <Error errorMessage={error} />}
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.inputText}
+          placeholder='username'
+          placeholderTextColor='white'
+          autoCapitalize='none'
+          onChangeText={(text) => setUsername(text)}
+        />
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          secureTextEntry
+          style={styles.inputText}
+          placeholder='password'
+          placeholderTextColor='white'
+          onChangeText={(text) => setPassword(text)}
+        />
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+        <Text style={styles.forgot}>Forgot Password?</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginBtn} onPress={login}>
+        <Text style={styles.loginText}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={{ marginTop: 5 }}>
+        <Text style={styles.loginText} onPress={() => navigation.navigate('SignUp')}>
+          Sign Up
+        </Text>
+      </TouchableOpacity>
+    </Layout>
   )
 }
 

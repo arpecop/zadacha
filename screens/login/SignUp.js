@@ -2,17 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 import { Auth } from 'aws-amplify'
 
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  ImageBackground
-} from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
 import Error from './Error'
 import styles from './styles'
-
-const image = require('../../assets/images/back.jpg')
+import Layout from '../../layout/LayoutLogin'
 
 const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
@@ -21,13 +14,13 @@ const SignUp = ({ navigation }) => {
     email: '',
     authCode: '',
     stage: 0,
-    error: { name: 'Empty' }
+    error: { name: 'Empty' },
   })
 
-  const handleUpdate = event => {
+  const handleUpdate = (event) => {
     setState({
       ...state,
-      [event.target]: event.value
+      [event.target]: event.value,
     })
   }
 
@@ -37,7 +30,7 @@ const SignUp = ({ navigation }) => {
       await Auth.signUp({
         username,
         password,
-        attributes: { email }
+        attributes: { email },
       })
       setState({ ...state, stage: 1, error: { name: 'Empty' } })
       navigation.setOptions({ title: 'Потвърди кода' })
@@ -56,83 +49,70 @@ const SignUp = ({ navigation }) => {
     }
   }
   return (
-    <View style={styles.container}>
-      <ImageBackground source={image} style={styles.image}>
-        {state.stage === 0 && (
-          <>
-            {state.error && <Error errorMessage={state.error} />}
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                placeholder='username'
-                placeholderTextColor='#003f5c'
-                autoCapitalize='none'
-                onChangeText={text =>
-                  handleUpdate({ target: 'username', value: text })
-                }
-              />
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                secureTextEntry
-                style={styles.inputText}
-                placeholder='password'
-                placeholderTextColor='#003f5c'
-                autoCapitalize='none'
-                onChangeText={text =>
-                  handleUpdate({ target: 'password', value: text })
-                }
-              />
-            </View>
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                placeholder='email...'
-                placeholderTextColor='#003f5c'
-                autoCapitalize='none'
-                onChangeText={text =>
-                  handleUpdate({ target: 'email', value: text })
-                }
-              />
-            </View>
-            <TouchableOpacity style={styles.loginBtn} onPress={signUp}>
-              <Text style={styles.loginText}>Sign Up</Text>
-            </TouchableOpacity>
-          </>
-        )}
-        {state.stage === 1 && (
-          <>
-            {state.error && <Error errorMessage={state.error} />}
-            <View style={styles.inputView}>
-              <TextInput
-                style={styles.inputText}
-                placeholder='auth code...'
-                placeholderTextColor='#003f5c'
-                autoCapitalize='none'
-                onChangeText={text =>
-                  handleUpdate({ target: 'authCode', value: text })
-                }
-              />
-            </View>
+    <Layout>
+      {state.stage === 0 && (
+        <>
+          {state.error && <Error errorMessage={state.error} />}
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.inputText}
+              placeholder='username'
+              placeholderTextColor='#003f5c'
+              autoCapitalize='none'
+              onChangeText={(text) => handleUpdate({ target: 'username', value: text })}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              secureTextEntry
+              style={styles.inputText}
+              placeholder='password'
+              placeholderTextColor='#003f5c'
+              autoCapitalize='none'
+              onChangeText={(text) => handleUpdate({ target: 'password', value: text })}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.inputText}
+              placeholder='email...'
+              placeholderTextColor='#003f5c'
+              autoCapitalize='none'
+              onChangeText={(text) => handleUpdate({ target: 'email', value: text })}
+            />
+          </View>
+          <TouchableOpacity style={styles.loginBtn} onPress={signUp}>
+            <Text style={styles.loginText}>Sign Up</Text>
+          </TouchableOpacity>
+        </>
+      )}
+      {state.stage === 1 && (
+        <>
+          {state.error && <Error errorMessage={state.error} />}
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.inputText}
+              placeholder='auth code...'
+              placeholderTextColor='#003f5c'
+              autoCapitalize='none'
+              onChangeText={(text) => handleUpdate({ target: 'authCode', value: text })}
+            />
+          </View>
 
-            <TouchableOpacity style={styles.loginBtn} onPress={confirmSignUp}>
-              <Text style={styles.loginText}>Confirm</Text>
-            </TouchableOpacity>
-          </>
-        )}
-        {state.stage === 2 && (
-          <>
-            <Text>You Signed up successfully</Text>
-            <TouchableOpacity
-              style={styles.loginBtn}
-              onPress={() => navigation.navigate('Login')}
-            >
-              <Text style={styles.loginText}>Влез</Text>
-            </TouchableOpacity>
-          </>
-        )}
-      </ImageBackground>
-    </View>
+          <TouchableOpacity style={styles.loginBtn} onPress={confirmSignUp}>
+            <Text style={styles.loginText}>Confirm</Text>
+          </TouchableOpacity>
+        </>
+      )}
+      {state.stage === 2 && (
+        <>
+          <Text>You Signed up successfully</Text>
+          <TouchableOpacity style={styles.loginBtn} onPress={confirmSignUp}>
+            <Text style={styles.loginText}>Влез</Text>
+          </TouchableOpacity>
+        </>
+      )}
+    </Layout>
   )
 }
 
