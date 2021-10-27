@@ -65,7 +65,7 @@ function Routes () {
     }
     mount()
   }, [])
-  //AsyncStorage.removeItem('user')
+  AsyncStorage.removeItem('user')
   return !user.username ? (
     <NavigationContainer>
       <Stack.Navigator>

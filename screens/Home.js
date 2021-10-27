@@ -10,14 +10,14 @@ export default function Home () {
   const video = React.useRef(null)
   const [status, setStatus] = useState({})
   const [currentVideo, setCurrentVideo] = useState(null)
-  const [loading, setLoading] = useState(true)
+  //const [loading, setLoading] = useState(true)
   const [videos, setVideos] = useState([])
   useEffect(() => {
     fetch('https://strapi.rudixlab.com/videos ')
       .then((response) => response.json())
       .then((json) => setVideos(json))
       .catch((error) => console.error(error))
-      .finally(() => setLoading(false))
+    //.finally(() => setLoading(false))
   }, [])
   return (
     <Layout>
@@ -78,10 +78,6 @@ export default function Home () {
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#ecf0f1',
-    flex: 1,
-  },
   item: { borderBottomColor: 'black', borderBottomWidth: StyleSheet.hairlineWidth, height: 50 },
   itemSelected: { backgroundColor: '#dfe4ea' },
   rowImage: { height: 50, width: 50 },

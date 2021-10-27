@@ -15,15 +15,12 @@ const translated = {
 }
 
 const Error = (props) =>
-  Object.entries(props).map(
-    ([err, val]) =>
-      val.name !== 'Empty' && (
-        <View key={val.name} style={styles.errorbox}>
-          <Text style={styles.errorboxText}>
-            {translated[val.name] ? translated[val.name] : `${val.message}-${val.name}`}
-          </Text>
-        </View>
-      ),
-  )
+  Object.entries(props).map(([err, val]) => (
+    <View key={val.name} style={styles.errorbox}>
+      <Text style={styles.errorboxText}>
+        {translated[val.name] ? translated[val.name] : `${val.message}-${val.name}`}
+      </Text>
+    </View>
+  ))
 
 export default Error
