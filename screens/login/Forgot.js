@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import { Auth } from 'aws-amplify'
+import { Auth } from 'aws-amplify';
 
-import { Text, View, TextInput, TouchableOpacity } from 'react-native'
-import Error from './Error'
-import styles from './styles'
-import Layout from '../../layout/LayoutLogin'
-import { BlurView } from 'expo-blur'
+import { Text, TextInput, TouchableOpacity } from 'react-native';
+import Error from './Error';
+import styles from './styles';
+import Layout from '../../layout/LayoutLogin';
+import { BlurView } from 'expo-blur';
 
 const Forgot = ({ navigation }) => {
   const [state, setState] = useState({
@@ -16,41 +16,45 @@ const Forgot = ({ navigation }) => {
     password: '',
     confirmPassword: '',
     stage: 0,
-  })
+  });
 
   const login = async () => {
-    console.log('======', state)
+    console.log('======', state);
     try {
-      await Auth.forgotPassword(state.username)
-      setState({ ...state, stage: 1 })
+      await Auth.forgotPassword(state.username);
+      setState({ ...state, stage: 1 });
     } catch (err) {
-      setState({ ...state, error: err })
+      setState({ ...state, error: err });
     }
-  }
+  };
   const submitCode = () => {
-    setState({ ...state, stage: 2 })
-  }
+    setState({ ...state, stage: 2 });
+  };
   const changePassword = async () => {
     try {
       if (state.password === state.confirmPassword) {
-        await Auth.forgotPasswordSubmit(state.username, state.validation, state.password)
-        setState({ ...state, stage: 3, error: { name: 'Empty' } })
+        await Auth.forgotPasswordSubmit(
+          state.username,
+          state.validation,
+          state.password
+        );
+        setState({ ...state, stage: 3, error: { name: 'Empty' } });
       } else {
         setState({
           ...state,
           error: { name: 'PasswordNotMatch', message: "Passwords don't Match" },
-        })
+        });
       }
     } catch (err) {
-      setState({ ...state, error: err })
+      setState({ ...state, error: err });
     }
-  }
-  const handleUpdate = (event) => {
+  };
+  const handleUpdate = event => {
     setState({
       ...state,
       [event.target]: event.value,
-    })
-  }
+    });
+  };
   return (
     <Layout>
       <Text>{state.error && <Error errorMessage={state.error} />}</Text>
@@ -62,7 +66,9 @@ const Forgot = ({ navigation }) => {
               placeholder='username'
               placeholderTextColor='white'
               autoCapitalize='none'
-              onChangeText={(text) => handleUpdate({ target: 'username', value: text })}
+              onChangeText={text =>
+                handleUpdate({ target: 'username', value: text })
+              }
             />
           </BlurView>
 
@@ -74,14 +80,18 @@ const Forgot = ({ navigation }) => {
 
       {state.stage === 1 && (
         <>
-          <Text style={{ color: 'white' }}>Check your email-a си for confirmation code</Text>
+          <Text style={{ color: 'white' }}>
+            Check your email for confirmation code
+          </Text>
           <BlurView intensity={80} tint='dark' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='4 digit code...'
               placeholderTextColor='white'
               autoCapitalize='none'
-              onChangeText={(text) => handleUpdate({ target: 'validation', value: text })}
+              onChangeText={text =>
+                handleUpdate({ target: 'validation', value: text })
+              }
             />
           </BlurView>
 
@@ -100,7 +110,9 @@ const Forgot = ({ navigation }) => {
               placeholder='password...'
               placeholderTextColor='white'
               autoCapitalize='none'
-              onChangeText={(text) => handleUpdate({ target: 'password', value: text })}
+              onChangeText={text =>
+                handleUpdate({ target: 'password', value: text })
+              }
             />
           </BlurView>
 
@@ -111,7 +123,9 @@ const Forgot = ({ navigation }) => {
               placeholder='confirm password...'
               placeholderTextColor='white'
               autoCapitalize='none'
-              onChangeText={(text) => handleUpdate({ target: 'confirmPassword', value: text })}
+              onChangeText={text =>
+                handleUpdate({ target: 'confirmPassword', value: text })
+              }
             />
           </BlurView>
 
@@ -122,13 +136,17 @@ const Forgot = ({ navigation }) => {
       )}
       {state.stage === 3 && (
         <>
-          <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginText}>Sign Up</Text>
+          <Text>Password Changed</Text>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => navigation.navigate('Login')}
+          >
+            <Text style={styles.loginText}>Login</Text>
           </TouchableOpacity>
         </>
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default Forgot
+export default Forgot;

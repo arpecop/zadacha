@@ -12,10 +12,6 @@ export const loggedInUserData = atom({
   },
 })
 
-export const items = atom({
-  key: 'items',
-  default: { rows: [] },
-})
 export const modal = atom({
   key: 'modal',
   default: false,

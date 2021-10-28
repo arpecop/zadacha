@@ -1,35 +1,36 @@
-import React, { useState } from 'react'
-import { Auth } from 'aws-amplify'
-import { Text, View, TextInput, TouchableOpacity, ImageBackground } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useRecoilState } from 'recoil'
-import { loggedInUserData } from '../../utils/state'
-import Error from './Error'
-import styles from './styles'
-import Layout from '../../layout/LayoutLogin'
-import { BlurView } from 'expo-blur'
+import React, { useState } from "react";
+import { Auth } from "aws-amplify";
+import { Text, TextInput, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRecoilState } from "recoil";
+import { BlurView } from "expo-blur";
+import { loggedInUserData } from "../../utils/state";
+import Error from "./Error";
+import styles from "./styles";
+import Layout from "../../layout/LayoutLogin";
+
 const Login = ({ navigation }) => {
-  const [user, setUser] = useRecoilState(loggedInUserData)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
+  const [user, setUser] = useRecoilState(loggedInUserData);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const login = async () => {
     try {
-      await Auth.signIn(username, password)
-      const user1 = await Auth.currentAuthenticatedUser()
-      const session = await Auth.currentSession()
+      await Auth.signIn(username, password);
+      const user1 = await Auth.currentAuthenticatedUser();
+      const session = await Auth.currentSession();
       const userInfo = {
         ...user1.attributes,
         username: user1.username,
         token: session.accessToken.jwtToken,
         refreshtoken: session.refreshToken.token,
-      }
-      setUser(userInfo)
-      AsyncStorage.setItem('user', JSON.stringify(userInfo))
+      };
+      setUser(userInfo);
+      AsyncStorage.setItem("user", JSON.stringify(userInfo));
     } catch (err) {
-      setError(err)
+      setError(err);
     }
-  }
+  };
 
   return (
     <Layout>
@@ -41,7 +42,7 @@ const Login = ({ navigation }) => {
           placeholder='username'
           placeholderTextColor='white'
           autoCapitalize='none'
-          onChangeText={(text) => setUsername(text)}
+          onChangeText={text => setUsername(text)}
         />
       </BlurView>
       <BlurView intensity={80} tint='dark' style={styles.inputView}>
@@ -50,22 +51,25 @@ const Login = ({ navigation }) => {
           style={styles.inputText}
           placeholder='password'
           placeholderTextColor='white'
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={text => setPassword(text)}
         />
       </BlurView>
-      <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+      <TouchableOpacity onPress={() => navigation.navigate("Forgot")}>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBtn} onPress={login}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity style={{ marginTop: 5 }}>
-        <Text style={styles.loginText} onPress={() => navigation.navigate('SignUp')}>
+        <Text
+          style={styles.loginText}
+          onPress={() => navigation.navigate("SignUp")}
+        >
           Sign Up
         </Text>
       </TouchableOpacity>
     </Layout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

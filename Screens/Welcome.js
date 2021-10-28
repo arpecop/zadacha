@@ -1,12 +1,12 @@
-import * as React from 'react'
+import * as React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import { StyleSheet, Text, View } from 'react-native'
 function Welcome ({ user }) {
   return (
     <View style={styles.container}>
       <Text>{user.username}</Text>
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
   container: {
@@ -15,5 +15,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-})
-export default Welcome
+});
+export default Welcome;

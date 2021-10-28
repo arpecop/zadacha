@@ -66,6 +66,7 @@ const Home = ({ route, navigation }) => {
       />
       <AdMobBanner
         bannerSize='fullBanner'
+        // eslint-disable-next-line max-len
         adUnitID='ca-app-pub-5476404733919333/2535930782' // Test ID, Replace with your-admob-unit-id
         servePersonalizedAds // true or false
       />
