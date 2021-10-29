@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: 20,
-    bottom: 0,
+    top: 0,
     marginBottom: 10,
     marginTop: 10,
     padding: 5,
@@ -59,5 +59,5 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     marginBottom: 40,
   },
-})
-export default styles
+});
+export default styles;

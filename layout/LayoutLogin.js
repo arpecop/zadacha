@@ -1,7 +1,8 @@
-import React from 'react'
-import { View, ImageBackground } from 'react-native'
-import styles from '../screens/login/styles'
-const image = require('../assets/images/back.jpg')
+import React from 'react';
+import { View, ImageBackground } from 'react-native';
+import styles from '../screens/login/styles';
+
+const image = require('../assets/images/back.jpg');
 
 const Layout = ({ children }) => (
   <View style={styles.container} key='container_login'>
@@ -9,5 +10,5 @@ const Layout = ({ children }) => (
       {children}
     </ImageBackground>
   </View>
-)
-export default Layout
+);
+export default Layout;
