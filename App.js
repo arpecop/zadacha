@@ -12,6 +12,7 @@ import Login from './screens/login/Login';
 import SignUp from './screens/login/SignUp';
 import Forgot from './screens/login/Forgot';
 import Home from './screens/Home';
+import Welcome from './screens/Welcome';
 
 // import useStorage from './hooks/useStorage'
 
@@ -46,7 +47,6 @@ function Routes () {
       fontWeight: '100',
     },
   };
-  // const screenOptions = { tabBarActiveTintColor: 'black', tabBarIconStyle: { color: 'black' } }
 
   useEffect(() => {
     async function mount () {
@@ -56,7 +56,7 @@ function Routes () {
     }
     mount();
   }, []);
-  AsyncStorage.removeItem('user');
+  //AsyncStorage.removeItem('user');
   return !user.username ? (
     <NavigationContainer>
       <Stack.Navigator>

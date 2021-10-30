@@ -12,15 +12,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { Col, Row } from 'react-native-easy-grid';
 import Layout from '../layout/Layout';
 import constants from '../utils/constants';
-
+import { fixUrl } from '../utils/api';
 export default function Home () {
   const video = React.useRef(null);
   const [status, setStatus] = useState({});
   const [currentVideo, setCurrentVideo] = useState(null);
-  // const [loading, setLoading] = useState(true)
+
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    fetch('https://strapi.rudixlab.com/videos ')
+    fetch('https://strapi.rudixlab.com/videos')
       .then(response => response.json())
       .then(json => setVideos(json))
       .catch(error => console.error(error));
@@ -35,11 +35,10 @@ export default function Home () {
             ref={video}
             style={styles.video}
             source={{
-              uri: `https://strapi.rudixlab.com${videos[currentVideo].url.url}`,
+              uri: videos[currentVideo].url.url,
             }}
             useNativeControls
             resizeMode='contain'
-            isLooping
             onPlaybackStatusUpdate={status => setStatus(() => status)}
           />
           <View style={styles.buttons}>
@@ -74,7 +73,7 @@ export default function Home () {
                 <Image
                   style={styles.rowImage}
                   source={{
-                    uri: `https://strapi.rudixlab.com${video.thumbnail.formats.medium.url}`,
+                    uri: video.thumbnail.formats.medium.url,
                   }}
                 />
               </Col>
