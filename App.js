@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { Amplify } from 'aws-amplify';
+import { useFonts } from 'expo-font';
 import { useRecoilState, RecoilRoot } from 'recoil';
 import { loggedInUserData } from './utils/state';
 import Login from './screens/login/Login';
@@ -36,6 +37,9 @@ const Tab = createBottomTabNavigator();
 
 function Routes () {
   const [user, setUser] = useRecoilState(loggedInUserData);
+  const [loaded] = useFonts({
+    Assistant: require('./assets/fonts/Assistant.ttf'),
+  });
   const options = {
     headerStyle: {
       backgroundColor: 'white',
@@ -46,7 +50,7 @@ function Routes () {
     headerTintColor: 'black',
     headerTitleStyle: {
       fontWeight: '100',
-      fontFamily: 'Roboto',
+      fontFamily: 'Assistant',
     },
   };
 
@@ -58,7 +62,7 @@ function Routes () {
     }
     mount();
   }, []);
-  //AsyncStorage.removeItem('user');
+  // AsyncStorage.removeItem('user');
   return !user.username ? (
     <NavigationContainer>
       <Stack.Navigator>

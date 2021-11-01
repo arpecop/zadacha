@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { Auth } from "aws-amplify";
+import { Auth } from 'aws-amplify';
 
-import { Text, TextInput, TouchableOpacity } from "react-native";
-import { BlurView } from "expo-blur";
-import Error from "./Error";
-import styles from "./styles";
-import Layout from "../../layout/LayoutLogin";
+import { Text, TextInput, TouchableOpacity } from 'react-native';
+import { BlurView } from 'expo-blur';
+import Error from './Error';
+import styles from './styles';
+import Layout from '../../layout/LayoutLogin';
 
 const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
-    username: "",
-    password: "",
-    email: "",
-    authCode: "",
+    username: '',
+    password: '',
+    email: '',
+    authCode: '',
     stage: 0,
-    error: { name: "Empty" },
+    error: { name: 'Empty' },
   });
 
   const handleUpdate = event => {
@@ -33,8 +33,8 @@ const SignUp = ({ navigation }) => {
         password,
         attributes: { email },
       });
-      setState({ ...state, stage: 1, error: { name: "Empty" } });
-      navigation.setOptions({ title: "Потвърди кода" });
+      setState({ ...state, stage: 1, error: { name: 'Empty' } });
+      navigation.setOptions({ title: 'Потвърди кода' });
     } catch (err) {
       setState({ ...state, error: err });
     }
@@ -44,7 +44,7 @@ const SignUp = ({ navigation }) => {
     const { username, authCode } = state;
     try {
       await Auth.confirmSignUp(username, authCode);
-      setState({ ...state, stage: 2, error: { name: "Empty" } });
+      setState({ ...state, stage: 2, error: { name: 'Empty' } });
     } catch (err) {
       setState({ ...state, error: err });
     }
@@ -54,37 +54,37 @@ const SignUp = ({ navigation }) => {
       {state.stage === 0 && (
         <>
           {state.error && <Error errorMessage={state.error} />}
-          <BlurView intensity={80} tint='dark' style={styles.inputView}>
+          <BlurView intensity={80} tint='light' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='username'
-              placeholderTextColor='white'
+              placeholderTextColor='black'
               autoCapitalize='none'
               onChangeText={text =>
-                handleUpdate({ target: "username", value: text })
+                handleUpdate({ target: 'username', value: text })
               }
             />
           </BlurView>
-          <BlurView intensity={80} tint='dark' style={styles.inputView}>
+          <BlurView intensity={80} tint='light' style={styles.inputView}>
             <TextInput
               secureTextEntry
               style={styles.inputText}
               placeholder='password'
-              placeholderTextColor='white'
+              placeholderTextColor='black'
               autoCapitalize='none'
               onChangeText={text =>
-                handleUpdate({ target: "password", value: text })
+                handleUpdate({ target: 'password', value: text })
               }
             />
           </BlurView>
-          <BlurView intensity={80} tint='dark' style={styles.inputView}>
+          <BlurView intensity={80} tint='light' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='email...'
-              placeholderTextColor='white'
+              placeholderTextColor='black'
               autoCapitalize='none'
               onChangeText={text =>
-                handleUpdate({ target: "email", value: text })
+                handleUpdate({ target: 'email', value: text })
               }
             />
           </BlurView>
@@ -96,14 +96,14 @@ const SignUp = ({ navigation }) => {
       {state.stage === 1 && (
         <>
           {state.error && <Error errorMessage={state.error} />}
-          <BlurView intensity={80} tint='dark' style={styles.inputView}>
+          <BlurView intensity={80} tint='light' style={styles.inputView}>
             <TextInput
               style={styles.inputText}
               placeholder='auth code...'
-              placeholderTextColor='white'
+              placeholderTextColor='black'
               autoCapitalize='none'
               onChangeText={text =>
-                handleUpdate({ target: "authCode", value: text })
+                handleUpdate({ target: 'authCode', value: text })
               }
             />
           </BlurView>

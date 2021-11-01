@@ -1,65 +1,68 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import { sawIntroState } from '../utils/state';
+import { Text, StyleSheet, ImageBackground, Image } from 'react-native';
+import constant from '../utils/constants';
 
 const slides = [
   {
     key: 1,
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
+    title:
+      'MyPwrApp - Your journey to personal power! \nMeet your most powerful self!',
     image: require('../assets/intro/1.png'),
     backgroundColor: '#59b2ab',
   },
   {
     key: 2,
-    title: 'Title 2',
-    text: 'Other cool stuff',
+    title: 'Your community, a safe and supportive place.',
+
     image: require('../assets/intro/2.png'),
     backgroundColor: '#febe29',
   },
   {
     key: 3,
-    title: 'Rocket guy',
-    text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
+    title: 'Reconnect to self and set new and powerful personal boundaries',
     image: require('../assets/intro/3.png'),
     backgroundColor: '#22bcb5',
   },
 ];
 
 const Intro = ({ navigation }) => {
-  const [state, setState] = useRecoilState(sawIntroState);
   const renderItem = ({ item }) => (
-    <View style={[styles.slide, { backgroundColor: item.backgroundColor }]}>
-      <Image source={item.image} style={styles.image} />
+    <ImageBackground
+      source={item.image}
+      style={[
+        styles.slide,
+        {
+          width: '100%',
+          height: '100%',
+        },
+      ]}
+    >
+      <Image source={require('../assets/icon.png')} style={styles.logo} />
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.text}>{item.text}</Text>
-    </View>
+    </ImageBackground>
   );
 
-  function onDone () {
+  const onDone = () => {
     navigation.navigate('Login');
-  }
+  };
   return (
     <AppIntroSlider renderItem={renderItem} data={slides} onDone={onDone} />
   );
 };
-export default Intro;
+
 const styles = StyleSheet.create({
   slide: {
     flex: 1,
-    justifyContent: 'center',
+    paddingTop: constant.height * 0.1,
     alignItems: 'center',
   },
-  image: {
-    width: 320,
-    height: 320,
-  },
+  logo: { width: 75, height: 75, marginBottom: 20 },
   title: {
-    fontSize: 22,
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
+    fontFamily: 'Assistant',
+    fontWeight: '500',
     marginTop: 10,
   },
   text: {
@@ -69,3 +72,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+export default Intro;
