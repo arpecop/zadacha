@@ -12,7 +12,7 @@ import Login from './screens/login/Login';
 import SignUp from './screens/login/SignUp';
 import Forgot from './screens/login/Forgot';
 import Home from './screens/Home';
-import Welcome from './screens/Welcome';
+
 import Intro from './screens/Intro';
 
 // import useStorage from './hooks/useStorage'
@@ -38,7 +38,7 @@ function Routes () {
   const [user, setUser] = useRecoilState(loggedInUserData);
   const options = {
     headerStyle: {
-      backgroundColor: '#FABAB8',
+      backgroundColor: 'white',
       elevation: 0,
       shadowOpacity: 0,
       borderBottomWidth: 0,
@@ -46,6 +46,7 @@ function Routes () {
     headerTintColor: 'black',
     headerTitleStyle: {
       fontWeight: '100',
+      fontFamily: 'Roboto',
     },
   };
 
@@ -61,6 +62,11 @@ function Routes () {
   return !user.username ? (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name='Intro'
+          component={Intro}
+        />
         <Stack.Screen
           options={{ headerShown: false }}
           name='Login'
