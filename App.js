@@ -13,6 +13,7 @@ import SignUp from './screens/login/SignUp';
 import Forgot from './screens/login/Forgot';
 import Home from './screens/Home';
 import Welcome from './screens/Welcome';
+import Intro from './screens/Intro';
 
 // import useStorage from './hooks/useStorage'
 
